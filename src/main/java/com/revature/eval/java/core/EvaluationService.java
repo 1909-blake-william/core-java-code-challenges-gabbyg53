@@ -30,8 +30,12 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String out = ""; //add 1st letter of word here to create acronym
+		String[] output =  phrase.split("[ -]"); //new String[phrase.length()];
+		for (String s : output) {
+		   out += Character.toUpperCase(s.charAt(0));
+		}
+	   return out;
 	}
 
 	/**
@@ -84,20 +88,23 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.getSideOne() == this.getSideTwo() && this.sideTwo == this.getSideThree()) return true;
+			else return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.getSideOne() == this.getSideTwo() && this.getSideTwo() != this.getSideThree()) return true;
+			else if (this.getSideOne() == this.getSideThree() && this.getSideThree() != this.getSideTwo()) return true;
+			else if (this.getSideTwo() == this.getSideThree() && this.getSideThree() != this.getSideOne()) return true;
+			else return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.getSideOne() != this.getSideTwo() && this.getSideOne() != this.getSideThree()) return true;
+			//else if (this.getSideTwo() != this.getSideThree() && this.getSideTwo() != this.getSideOne()) return true;
+			//else if (this.getSideThree() != this.getSideOne() && this.getSideThree() != this.getSideTwo()) return true; 
+			else return false;
 		}
-
 	}
 
 	/**
@@ -116,8 +123,37 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int total = 0;
+		for (int i = 0; i < string.length(); i++) {
+			if (string.charAt(i) == 'a' | string.charAt(i) == 'e' | string.charAt(i) == 'i' | string.charAt(i) == 'o'|
+				string.charAt(i) == 'u' | string.charAt(i) == 'l' |	string.charAt(i) == 'n' | string.charAt(i) == 'r' |
+				string.charAt(i) == 's' | string.charAt(i) == 't' | string.charAt(i) == 'A' | string.charAt(i) == 'E' | 
+				string.charAt(i) == 'I' | string.charAt(i) == 'O'| string.charAt(i) == 'U' | string.charAt(i) == 'L' |	
+				string.charAt(i) == 'N' | string.charAt(i) == 'R' | string.charAt(i) == 'S' | string.charAt(i) == 'T') {
+				total+=1;	
+			}
+			else if (string.charAt(i) == 'd' | string.charAt(i) == 'g' | string.charAt(i) == 'D' | string.charAt(i) == 'G') {
+				total+=2;
+			}
+			else if (string.charAt(i) == 'b' | string.charAt(i) == 'c' | string.charAt(i) == 'm' | string.charAt(i) == 'p' |
+					string.charAt(i) == 'B' | string.charAt(i) == 'C' | string.charAt(i) == 'M' | string.charAt(i) == 'P') {
+				total+=3;
+			}
+			else if (string.charAt(i) == 'f' | string.charAt(i) == 'h' | string.charAt(i) == 'v' |
+					string.charAt(i) == 'w' | string.charAt(i) == 'y' | string.charAt(i) == 'F' | string.charAt(i) == 'H' | 
+					string.charAt(i) == 'V' | string.charAt(i) == 'W' | string.charAt(i) == 'Y') {
+				total+=4;
+			}
+			else if (string.charAt(i) == 'k' | string.charAt(i) == 'K') {
+				total+=5; }
+			else if (string.charAt(i) == 'j' | string.charAt(i) == 'x' | string.charAt(i) == 'J' | string.charAt(i) == 'X') {
+				total +=8;
+			}
+			else if (string.charAt(i) == 'q'  | string.charAt(i) == 'z' | string.charAt(i) == 'Q'  | string.charAt(i) == 'Z') {
+				total+=10;
+			}
+		}
+		return total;
 	}
 
 	/**
@@ -152,8 +188,22 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String out = "";
+		for (int i  = 0; i < string.length(); i++) {
+			if (Character.isLetter(string.charAt(i))) {
+				throw new IllegalArgumentException();	
+			}
+			if (Character.isDigit(string.charAt(i))) {
+				out +=string.charAt(i);
+				if (out.length() >= 11) {
+					throw new IllegalArgumentException();	
+				}
+			}
+		}
+		if (out.length() < 10) {
+			throw new IllegalArgumentException();	
+		}
+	return out;
 	}
 
 	/**
@@ -166,8 +216,22 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String, Integer> output = new HashMap<String, Integer>();
+		Integer count = 0;	
+		String[] words =  string.split("[ ,.?@\\n|$^*&/=#%-()]+");  //if +inside it effs up?
+		
+		for (int i = 0; i < words.length; i++) {
+			count = output.get(words[i]);
+			if (output.containsKey(words[i])) {
+				count++;
+				output.put(words[i], count);
+			}
+			else {
+				count = 1;
+				output.put(words[i], count);
+			} 
+		}	
+		return output;
 	}
 
 	/**
