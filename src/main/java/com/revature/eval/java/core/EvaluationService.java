@@ -513,8 +513,10 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		for (char c = 'a'; c < 'z'; c++) {
+			if (!string.contains(""+c)) return false;
+		}
+		return true;
 	}
 
 	/**
