@@ -596,9 +596,34 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+	public boolean isLuhnValid(String string) { //first test case fails junit test but passes debugging?
+		System.out.println(string);
+		String computedString = "";
+		int sum = 0;
+		if (string.length() <= 1) return false;
+		
+		for (int i = 0; i < string.length(); i++) {
+			if (Character.isDigit(string.charAt(i))) {
+				computedString += string.charAt(i);
+			}
+		}
+		
+		int [] nums = new int [computedString.length()];
+		for (int j = 0; j < computedString.length(); j++) {
+			nums[j] = (int)(computedString.charAt(j)-'0');
+		}
+		
+		for (int k = nums.length-1; k >= 0 ; k -= 2) { //k=0, k < nums.length; k+2
+			nums[k] *= 2;
+			if (nums[k]*2 > 9) nums[k] -= 9;
+			System.out.print(nums[k]);
+		}
+		System.out.println();
+		for (int o = 0; o < nums.length; o++) {System.out.print(nums[o]);}
+		for (int p : nums) sum += p;
+		
+		if (sum % 10 == 0) return true;
+		else return false;
 	}
 
 	/**
