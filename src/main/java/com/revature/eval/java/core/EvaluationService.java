@@ -531,8 +531,38 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String[] outString = string.split(" ");
+			String out = "";
+			int space = 0;
+			
+			for (int i = 0; i < string.length(); i++) {
+				if (string.charAt(i) <= 'z' & string.charAt(i) >= 'a') {
+					out += (char)(('z' - (string.charAt(i) - 'a')));
+					space++;
+					if (space == 5) {
+						out+=' ';
+						space = 0;
+					}
+				}
+				else if (string.charAt(i) <= 'Z' & string.charAt(i) >= 'A') {
+					out += Character.toLowerCase((char)('Z' - (string.charAt(i) - 'A')));
+					space++;
+					if (space == 5) {
+						out+=' ';
+						space = 0;
+					}
+				}
+				else if(Character.isDigit(string.charAt(i))) {
+					out += string.charAt(i);
+					space++;
+					if (space == 5) {
+						out+=' ';
+						space = 0;
+					}
+				}
+			}	
+			out = out.trim();
+			return out;
 		}
 
 		/**
