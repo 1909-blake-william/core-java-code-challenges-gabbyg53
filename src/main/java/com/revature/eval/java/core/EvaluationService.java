@@ -805,8 +805,23 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int result = 0;
+		String input = string.replace('?', ' ');
+		String [] numbers = input.split(" ");
+
+		if (numbers[3].equals("plus")) {
+			result = Integer.parseInt(numbers[2]) + Integer.parseInt(numbers[4]);
+		}
+		if (numbers[3].equals("minus")) {
+			result =  Integer.parseInt(numbers[2]) - Integer.parseInt(numbers[4]);
+		}
+		if (numbers[3].equals("divided")) {
+			result =  Integer.parseInt(numbers[2]) / Integer.parseInt(numbers[5]);
+		}
+		if (numbers[3].equals("multiplied")) {
+			result =  Integer.parseInt(numbers[2]) * Integer.parseInt(numbers[5]);
+		}
+		return result;
 	}
 
 }
