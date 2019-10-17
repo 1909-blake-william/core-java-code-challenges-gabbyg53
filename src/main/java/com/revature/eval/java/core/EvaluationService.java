@@ -613,7 +613,40 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
+		String out = "";
+		int sum = 0;
+		
+		for (int i = 0; i < string.length(); i++) {
+			if (Character.isDigit(string.charAt(i))) {
+				out += string.charAt(i);
+			}
+			if (Character.isLetter(string.charAt(i))) {
+				out += string.charAt(i);
+			}
+		}
+
+		int [] arrIsbn = new int [out.length()];
+		for (int i = 0; i < out.length(); i ++) {
+			arrIsbn[i] = (int)(out.charAt(i) - '0');
+		}
+	
+		for (int i = 0; i < arrIsbn.length; i++) {
+			sum += arrIsbn[i] * (10-i);
+		}
+		if(sum % 11 == 0) return true;
+		
+		if (out.charAt(9) == 'X') {
+			int s = 0;
+			arrIsbn[9] = 10;
+			System.out.println();
+			for(int i = 0; i < arrIsbn.length; i++) { 
+				s += arrIsbn[i] * (10-i);
+			}
+			if(s % 11 == 0) return true;
+		}
+		
+		if (!Character.isDigit(out.charAt(9)) | out.charAt(9) != 'X') return false;
+		
 		return false;
 	}
 
