@@ -309,9 +309,38 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
+	public static boolean isVowel(char c){
+		if (( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')) return true;
+		else return false;
+	}
+	
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		//System.out.println(string);
+		String[] phrase = string.split(" ");
+		String result = "";
+		
+		for (String word : phrase) {
+			if (isVowel(string.charAt(0)) == true) {
+					result = string + "ay";
+			}
+			else {
+				if (isVowel(string.charAt(1)) == false & isVowel(string.charAt(2)) == false) {
+					result  = string.substring(3) + string.charAt(0) + string.charAt(1) + string.charAt(2) + "ay";
+					}
+				else if (isVowel(string.charAt(1)) == false){
+					result = string.substring(2) + string.charAt(0) + string.charAt(1) + "ay";
+					/*if (string.charAt(0) == 'q') {
+						result = string.substring(2) + string.charAt(0) + 'q' +string.charAt(1) + "ay";
+					}*/
+				}
+				else result = string.substring(1) + string.charAt(0) + "ay";
+			}
+			result += " ";
+		}
+		result = result.trim();
+	//	System.out.println(result);
+		return result;
 	}
 
 	/**
@@ -400,8 +429,30 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			//System.out.println(string);
+			String output = new String();
+			
+			for (int j = 0; j < string.length(); j++) {
+				int p = (string.charAt(j) -'a'); // (char)'a' 
+				int u = p + key;
+				boolean letter = Character.isLetter(string.charAt(j));
+				//if (Character.isLetter(string.charAt(j))) {
+					if (letter == true) {
+						if (Character.isLowerCase(string.charAt(j))) {
+							output += (char)(u % 26 + 'a');
+						//	System.out.println(output + "low");
+						}
+						else if (Character.isUpperCase(string.charAt(j))) {
+							output += (char)((string.charAt(j) -'A') + key % 26 + 'A');
+						//	System.out.println(output + "up");
+						}
+					}
+					else { 
+						output += (char)((string.charAt(j)));
+					}
+			}
+			//System.out.println(output);
+			return output;
 		}
 
 	}
@@ -418,9 +469,33 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
+	
+	public static boolean isPrime(int i) {
+		if(i != 1 & i % i == 0) return true;
+		else return false;
+	}
+	
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		//	System.out.println(i);
+		List<Long> primeArr = new ArrayList<Long>(i);
+		int count = 2;
+		
+		if (i == 0) throw new IllegalArgumentException();
+		if (i == 1) {count++; return 2;}
+			while (count < i) {
+				for (int index = 2; index <= i; index++) { //0, //2, num
+					if (isPrime(index) == true) {
+						primeArr.add((long)index);
+					//count += 1;
+						break;
+					}
+					if (index == count) count += 1;
+				long k = count;
+				return (int)k;
+				}
+		}
+//		System.out.println(count);
+	return i;
 	}
 
 	/**
