@@ -572,8 +572,21 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String out = "";
+			int space = 0;
+			
+			for (int i = 0; i < string.length(); i++) {
+				if (string.charAt(i) <= 'z' & string.charAt(i) >= 'a') {
+					out += (char)(('a' - (string.charAt(i) - 'z')));
+					space++;
+				}
+				else if (string.charAt(i) <= 'Z' & string.charAt(i) >= 'A') {
+					out += Character.toLowerCase((char)('A' - (string.charAt(i) - 'Z')));
+				}
+				else out+= (char)string.charAt(i);
+			}
+			out = out.replaceAll(" ", "");
+			return out;
 		}
 	}
 
