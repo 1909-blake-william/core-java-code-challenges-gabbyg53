@@ -397,29 +397,18 @@ public class EvaluationService {
 	
 	
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		System.out.println(l);
 		List<Long> prime = new ArrayList<Long>();
-		//int count = 0;
-		            
-		// for(int i = 3; i < l; i+=2) {
-		for (int i = 2; i <= l; i++) { //l
-		//if (isPrime(i) == true) {// & l % i ==0) {
-		if (isPrime(i) == true & l%i == 0) {	
-//			if (l % i == 0) {
-				prime.add((long)i);
-				//count++;
-				//if (i == count) {
-					//prime.add((long)i);
-					//count++;
-			}	
-			/*else {
-				l /= 2;
-				if (l % i == 0) prime.add((long)i);
-			}*/
-		//}	
-	//	}
+		int count = 0;
+		int i = 2;
+		while (l > 1) {
+			if (isPrime(i) == true && l % i == 0) {
+				prime.add((long) i);
+				l /= i;
+				i = 2;
+			} else {
+				i++;
+			}
 		}
-		System.out.println(prime);
 		return prime;
 	}
 
