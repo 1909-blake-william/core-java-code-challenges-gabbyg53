@@ -397,12 +397,27 @@ public class EvaluationService {
 	
 	
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		List<Long> prime = new ArrayList<Long>(); 
-		prime.add(l);
-		for (int i = 0; i < prime.size(); i++) {
-			if ( prime.get(i) != 1 & prime.get(i)%prime.get(i) == 0 ) {
-				prime.add(i, prime.get(i));
-			} 
+		System.out.println(l);
+		List<Long> prime = new ArrayList<Long>();
+		//int count = 0;
+		            
+		// for(int i = 3; i < l; i+=2) {
+		for (int i = 2; i <= l; i++) { //l
+		//if (isPrime(i) == true) {// & l % i ==0) {
+		if (isPrime(i) == true & l%i == 0) {	
+//			if (l % i == 0) {
+				prime.add((long)i);
+				//count++;
+				//if (i == count) {
+					//prime.add((long)i);
+					//count++;
+			}	
+			/*else {
+				l /= 2;
+				if (l % i == 0) prime.add((long)i);
+			}*/
+		//}	
+	//	}
 		}
 		System.out.println(prime);
 		return prime;
@@ -484,32 +499,37 @@ public class EvaluationService {
 	 * @return
 	 */
 	
-	public static boolean isPrime(int i) {
-		if(i != 1 & i % i == 0) return true;
-		else return false;
-	}
-	
 	public int calculateNthPrime(int i) {
 		//	System.out.println(i);
 		List<Long> primeArr = new ArrayList<Long>(i);
-		int count = 2;
+		int count = 1;
+		
+		/*if (i == 0) throw new IllegalArgumentException();
+		if (i == 1) return 2; //count++;
+		int count = 0;
+		while (count < i) {
+			for (int index = 0; index <= count; index++) {
+				if (isPrime(index) == true) break;
+			} 
+			if (i == count) count++;
+		}*/
 		
 		if (i == 0) throw new IllegalArgumentException();
-		if (i == 1) {count++; return 2;}
-			while (count < i) {
-				for (int index = 2; index <= i; index++) { //0, //2, num
+		else if (i == 1) return 2;
+		else {
+				for (int index = 2; index < i; index++) { //0, //2, num,copy
 					if (isPrime(index) == true) {
-						primeArr.add((long)index);
-					//count += 1;
-						break;
+					primeArr.add((long)index);
+						System.out.println(index);
+						count++;
 					}
-					if (index == count) count += 1;
-				long k = count;
-				return (int)k;
+					long k = count;
+				//	return (int)k;
 				}
-		}
-//		System.out.println(count);
-	return i;
+				//System.out.println(count);
+			}
+
+		return i;
 	}
 
 	/**
