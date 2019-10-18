@@ -489,36 +489,28 @@ public class EvaluationService {
 	 */
 	
 	public int calculateNthPrime(int i) {
-		//	System.out.println(i);
-		List<Long> primeArr = new ArrayList<Long>(i);
-		int count = 1;
-		
-		/*if (i == 0) throw new IllegalArgumentException();
-		if (i == 1) return 2; //count++;
-		int count = 0;
-		while (count < i) {
-			for (int index = 0; index <= count; index++) {
-				if (isPrime(index) == true) break;
-			} 
-			if (i == count) count++;
-		}*/
-		
+	List<Integer> primeArr = new ArrayList();
+		int count = 3;
+		int index = 1;
+		primeArr.add(2);
 		if (i == 0) throw new IllegalArgumentException();
 		else if (i == 1) return 2;
 		else {
-				for (int index = 2; index < i; index++) { //0, //2, num,copy
-					if (isPrime(index) == true) {
-					primeArr.add((long)index);
-						System.out.println(index);
-						count++;
-					}
-					long k = count;
-				//	return (int)k;
+			//while (count < i) {
+			while (true) {
+				
+				if (isPrime(count) == true) {
+					index++;
+					primeArr.add(count);
+					//
 				}
-				//System.out.println(count);
+				count++;
+				if (i == index) break;
 			}
-
-		return i;
+		}
+		// System.out.println(count);
+		System.out.println(index-1);
+		return primeArr.get(index-1);
 	}
 
 	/**
