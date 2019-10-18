@@ -3,6 +3,11 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class EvaluationService {
 
@@ -382,6 +387,15 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
+	
+	public static boolean isPrime(int i) {
+		for (int index = 2; index < i; index++) {
+			if(index != 1 & i % index == 0) return false;
+		}
+		return true;
+	}
+	
+	
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		List<Long> prime = new ArrayList<Long>(); 
 		prime.add(l);
