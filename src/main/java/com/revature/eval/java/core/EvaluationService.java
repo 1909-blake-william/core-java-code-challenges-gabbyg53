@@ -713,8 +713,15 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		if (given instanceof LocalDate) {
+			LocalDateTime ld = LocalDateTime.of((LocalDate)given, LocalTime.MIN);
+			return ld.plusSeconds(1000000000);
+		}
+		
+		else if (given instanceof LocalDateTime) {
+			return ((LocalDateTime) given).plusSeconds(1000000000);
+		}
+		return given;
 	}
 
 	/**
@@ -731,16 +738,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
+		HashSet<Integer> multiplesOfI = new HashSet<Integer>();
 		int sum = 0;
-		int [] resultSet = new int[i];
-		
-		for (int index = 0; index < i; i++) {
-			for (int k = 0; k < set.length; k++) {
-				if (index % set[k] == 0) {
-					sum += index;
-					resultSet[index] += index;
+	
+		for (int index = 1; index < i; index++) {
+			for (int k : set) {
+				if (index % k == 0) { //index
+					multiplesOfI.add(index);
 				}
 			}
+		}
+		for (int m : multiplesOfI) {
+			sum += m;
 		}
 		return sum;
 	}
