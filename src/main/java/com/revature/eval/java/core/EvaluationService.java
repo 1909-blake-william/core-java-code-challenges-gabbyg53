@@ -1,13 +1,15 @@
 package com.revature.eval.java.core;
 
-import java.time.temporal.Temporal;
-import java.util.List;
-import java.util.Map;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class EvaluationService {
 
@@ -36,7 +38,7 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		String out = ""; //add 1st letter of word here to create acronym
-		String[] output =  phrase.split("[ -]"); //new String[phrase.length()];
+		String[] output =  phrase.split("[ -]");
 		for (String s : output) {
 		   out += Character.toUpperCase(s.charAt(0));
 		}
@@ -105,9 +107,7 @@ public class EvaluationService {
 		}
 
 		public boolean isScalene() {
-			if (this.getSideOne() != this.getSideTwo() && this.getSideOne() != this.getSideThree()) return true;
-			//else if (this.getSideTwo() != this.getSideThree() && this.getSideTwo() != this.getSideOne()) return true;
-			//else if (this.getSideThree() != this.getSideOne() && this.getSideThree() != this.getSideTwo()) return true; 
+			if (this.getSideOne() != this.getSideTwo() && this.getSideOne() != this.getSideThree()) return true; 
 			else return false;
 		}
 	}
@@ -141,12 +141,12 @@ public class EvaluationService {
 				total+=2;
 			}
 			else if (string.charAt(i) == 'b' | string.charAt(i) == 'c' | string.charAt(i) == 'm' | string.charAt(i) == 'p' |
-					string.charAt(i) == 'B' | string.charAt(i) == 'C' | string.charAt(i) == 'M' | string.charAt(i) == 'P') {
+				string.charAt(i) == 'B' | string.charAt(i) == 'C' | string.charAt(i) == 'M' | string.charAt(i) == 'P') {
 				total+=3;
 			}
 			else if (string.charAt(i) == 'f' | string.charAt(i) == 'h' | string.charAt(i) == 'v' |
-					string.charAt(i) == 'w' | string.charAt(i) == 'y' | string.charAt(i) == 'F' | string.charAt(i) == 'H' | 
-					string.charAt(i) == 'V' | string.charAt(i) == 'W' | string.charAt(i) == 'Y') {
+				string.charAt(i) == 'w' | string.charAt(i) == 'y' | string.charAt(i) == 'F' | string.charAt(i) == 'H' | 
+				string.charAt(i) == 'V' | string.charAt(i) == 'W' | string.charAt(i) == 'Y') {
 				total+=4;
 			}
 			else if (string.charAt(i) == 'k' | string.charAt(i) == 'K') {
@@ -208,7 +208,7 @@ public class EvaluationService {
 		if (out.length() < 10) {
 			throw new IllegalArgumentException();	
 		}
-	return out;
+		return out;
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class EvaluationService {
 	public Map<String, Integer> wordCount(String string) {
 		Map<String, Integer> output = new HashMap<String, Integer>();
 		Integer count = 0;	
-		String[] words =  string.split("[ ,.?@\\n|$^*&/=#%-()]+");  //if +inside it effs up?
+		String[] words =  string.split("[ ,.?@\\n|$^*&/=#%-()]+");  //if +inside it doesn't work
 		
 		for (int i = 0; i < words.length; i++) {
 			count = output.get(words[i]);
@@ -278,8 +278,8 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			int index = Collections.binarySearch(sortedList, t);
+			return index;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -321,19 +321,18 @@ public class EvaluationService {
 	}
 	
 	public String toPigLatin(String string) {
-		//System.out.println(string);
 		String[] phrase = string.split(" ");
 		String result = "";
 		
 		for (String word : phrase) {
 			if (isVowel(string.charAt(0)) == true) {
-					result = string + "ay";
+				result = string + "ay";
 			}
 			else {
 				if (isVowel(string.charAt(1)) == false & isVowel(string.charAt(2)) == false) {
 					result  = string.substring(3) + string.charAt(0) + string.charAt(1) + string.charAt(2) + "ay";
-					}
-				else if (isVowel(string.charAt(1)) == false){
+				}
+				else if (isVowel(string.charAt(1)) == false) {
 					result = string.substring(2) + string.charAt(0) + string.charAt(1) + "ay";
 					/*if (string.charAt(0) == 'q') {
 						result = string.substring(2) + string.charAt(0) + 'q' +string.charAt(1) + "ay";
@@ -344,7 +343,6 @@ public class EvaluationService {
 			result += " ";
 		}
 		result = result.trim();
-	//	System.out.println(result);
 		return result;
 	}
 
@@ -394,20 +392,17 @@ public class EvaluationService {
 		}
 		return true;
 	}
-	
-	
+
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		List<Long> prime = new ArrayList<Long>();
-		int count = 0;
 		int i = 2;
 		while (l > 1) {
 			if (isPrime(i) == true && l % i == 0) {
 				prime.add((long) i);
 				l /= i;
 				i = 2;
-			} else {
-				i++;
-			}
+			} 
+			else i++;
 		}
 		return prime;
 	}
@@ -447,29 +442,24 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			//System.out.println(string);
 			String output = new String();
 			
 			for (int j = 0; j < string.length(); j++) {
 				int p = (string.charAt(j) -'a'); // (char)'a' 
 				int u = p + key;
 				boolean letter = Character.isLetter(string.charAt(j));
-				//if (Character.isLetter(string.charAt(j))) {
 					if (letter == true) {
 						if (Character.isLowerCase(string.charAt(j))) {
 							output += (char)(u % 26 + 'a');
-						//	System.out.println(output + "low");
 						}
 						else if (Character.isUpperCase(string.charAt(j))) {
 							output += (char)((string.charAt(j) -'A') + key % 26 + 'A');
-						//	System.out.println(output + "up");
 						}
 					}
 					else { 
 						output += (char)((string.charAt(j)));
 					}
 			}
-			//System.out.println(output);
 			return output;
 		}
 
@@ -496,20 +486,16 @@ public class EvaluationService {
 		if (i == 0) throw new IllegalArgumentException();
 		else if (i == 1) return 2;
 		else {
-			//while (count < i) {
 			while (true) {
 				
 				if (isPrime(count) == true) {
 					index++;
 					primeArr.add(count);
-					//
 				}
 				count++;
 				if (i == index) break;
 			}
 		}
-		// System.out.println(count);
-		System.out.println(index-1);
 		return primeArr.get(index-1);
 	}
 
@@ -588,12 +574,10 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			String out = "";
-			int space = 0;
 			
 			for (int i = 0; i < string.length(); i++) {
 				if (string.charAt(i) <= 'z' & string.charAt(i) >= 'a') {
 					out += (char)(('a' - (string.charAt(i) - 'z')));
-					space++;
 				}
 				else if (string.charAt(i) <= 'Z' & string.charAt(i) >= 'A') {
 					out += Character.toLowerCase((char)('A' - (string.charAt(i) - 'Z')));
@@ -724,14 +708,12 @@ public class EvaluationService {
 	
 		for (int index = 1; index < i; index++) {
 			for (int k : set) {
-				if (index % k == 0) { //index
+				if (index % k == 0) {
 					multiplesOfI.add(index);
 				}
 			}
 		}
-		for (int m : multiplesOfI) {
-			sum += m;
-		}
+		for (int m : multiplesOfI) sum += m;
 		return sum;
 	}
 
@@ -771,8 +753,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isLuhnValid(String string) { //first test case fails junit test but passes debugging?
-		System.out.println(string);
+	public boolean isLuhnValid(String string) {
 		String computedString = "";
 		int sum = 0;
 		if (string.length() <= 1) return false;
@@ -788,13 +769,10 @@ public class EvaluationService {
 			nums[j] = (int)(computedString.charAt(j)-'0');
 		}
 		
-		for (int k = nums.length-1; k >= 0 ; k -= 2) { //k=0, k < nums.length; k+2
+		for (int k = nums.length-1; k >= 0 ; k -= 2) {
 			nums[k] *= 2;
 			if (nums[k]*2 > 9) nums[k] -= 9;
-			System.out.print(nums[k]);
 		}
-		System.out.println();
-		for (int o = 0; o < nums.length; o++) {System.out.print(nums[o]);}
 		for (int p : nums) sum += p;
 		
 		if (sum % 10 == 0) return true;
