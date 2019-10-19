@@ -42,7 +42,7 @@ public class EvaluationService {
 		for (String s : output) {
 		   out += Character.toUpperCase(s.charAt(0));
 		}
-	   return out;
+		return out;
 	}
 
 	/**
@@ -280,6 +280,31 @@ public class EvaluationService {
 		public int indexOf(T t) {
 			int index = Collections.binarySearch(sortedList, t);
 			return index;
+			
+			/*int initialPoint = (int) sortedList.get(0);
+			int midPoint = sortedList.size()/2;
+			int endPoint = sortedList.size()-1;
+			
+		//	if (!sortedList.contains(t)) return -1;
+			if (t.compareTo(sortedList.get(midPoint)) == 0) {
+				sortedList.get(midPoint);
+				System.out.println(sortedList.get(midPoint));
+				return midPoint; 
+			}
+			else if (t.compareTo(sortedList.get(midPoint)) > 0) { 
+				//sortedList.get(endPoint); 
+			//	for (int i = endPoint; i > midPoint; i--) {
+					if (t.compareTo(sortedList.get(endPoint/2)) > 0) {
+						
+					}
+				//}
+			}
+			else if (t.compareTo(sortedList.get(midPoint)) < 0) {
+				for (int i = 0; i < midPoint; i++) {}
+			}
+			else if (t.compareTo(sortedList.get(0)) == 0)  {}
+			else if (t.compareTo(sortedList.get(endPoint)) == 0) return endPoint;
+			return 0;*/
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -637,7 +662,6 @@ public class EvaluationService {
 		if (out.charAt(9) == 'X') {
 			int s = 0;
 			arrIsbn[9] = 10;
-			System.out.println();
 			for(int i = 0; i < arrIsbn.length; i++) { 
 				s += arrIsbn[i] * (10-i);
 			}
